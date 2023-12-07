@@ -16,6 +16,7 @@
 		CF676CA12B212BB6004E168B /* food_aroundTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF676CA02B212BB6004E168B /* food_aroundTests.swift */; };
 		CF676CAB2B212BB6004E168B /* food_aroundUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF676CAA2B212BB6004E168B /* food_aroundUITests.swift */; };
 		CF676CAD2B212BB6004E168B /* food_aroundUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF676CAC2B212BB6004E168B /* food_aroundUITestsLaunchTests.swift */; };
+		CF676CBE2B212F6B004E168B /* Capital.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF676CBD2B212F6B004E168B /* Capital.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		CF676CA62B212BB6004E168B /* food aroundUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "food aroundUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF676CAA2B212BB6004E168B /* food_aroundUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = food_aroundUITests.swift; sourceTree = "<group>"; };
 		CF676CAC2B212BB6004E168B /* food_aroundUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = food_aroundUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		CF676CBD2B212F6B004E168B /* Capital.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Capital.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,9 +103,10 @@
 			children = (
 				CF676C892B212BB1004E168B /* AppDelegate.swift */,
 				CF676C8B2B212BB1004E168B /* SceneDelegate.swift */,
-				CF676C8D2B212BB1004E168B /* ViewController.swift */,
-				CF676C8F2B212BB1004E168B /* Main.storyboard */,
+				CF676CBA2B212BDB004E168B /* Control */,
+				CF676CB92B212BCC004E168B /* View */,
 				CF676C922B212BB5004E168B /* Assets.xcassets */,
+				CF676CBC2B212BF7004E168B /* Mode */,
 				CF676C942B212BB5004E168B /* LaunchScreen.storyboard */,
 				CF676C972B212BB5004E168B /* Info.plist */,
 			);
@@ -125,6 +128,30 @@
 				CF676CAC2B212BB6004E168B /* food_aroundUITestsLaunchTests.swift */,
 			);
 			path = "food aroundUITests";
+			sourceTree = "<group>";
+		};
+		CF676CB92B212BCC004E168B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CF676C8F2B212BB1004E168B /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CF676CBA2B212BDB004E168B /* Control */ = {
+			isa = PBXGroup;
+			children = (
+				CF676C8D2B212BB1004E168B /* ViewController.swift */,
+			);
+			path = Control;
+			sourceTree = "<group>";
+		};
+		CF676CBC2B212BF7004E168B /* Mode */ = {
+			isa = PBXGroup;
+			children = (
+				CF676CBD2B212F6B004E168B /* Capital.swift */,
+			);
+			path = Mode;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -260,6 +287,7 @@
 			files = (
 				CF676C8E2B212BB1004E168B /* ViewController.swift in Sources */,
 				CF676C8A2B212BB1004E168B /* AppDelegate.swift in Sources */,
+				CF676CBE2B212F6B004E168B /* Capital.swift in Sources */,
 				CF676C8C2B212BB1004E168B /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

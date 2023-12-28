@@ -13,16 +13,26 @@ class Location: NSObject, MKAnnotation {
     // for easier nation to recipe association
     let id: Int
     
-    let name: String
+    // required by MKAnnotation protocol
+    let title: String?
+    
     // short description
     let info: String
 
     // [longitude, latitude]
     let coordinate: CLLocationCoordinate2D
    
-    init(name: String, coordinate: CLLocationCoordinate2D, info: String) {
+    init(title: String, coordinate: CLLocationCoordinate2D, info: String) {
         self.id = 0 // placeholder
-        self.name = name
+        self.title = title
+        self.coordinate = coordinate
+        self.info = info
+    }
+
+   // ctor that set id (for RecipeLoc)
+    init(id: Int, title: String, coordinate: CLLocationCoordinate2D, info: String) {
+        self.id = id
+        self.title = title
         self.coordinate = coordinate
         self.info = info
     }

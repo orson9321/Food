@@ -11,8 +11,8 @@ import MapKit
 class Nation: Location
 {
   let recipe_pin_ids: [Int]
-  init(name: String, coordinate: CLLocationCoordinate2D, info: String, recipe_pin_ids: [Int]) {
+  init(title: String, coordinate: CLLocationCoordinate2D, info: String, recipe_pin_ids: [Int]) {
       self.recipe_pin_ids = recipe_pin_ids
-      super.init(name: name, coordinate: coordinate, info: info)
+      super.init(title: title, coordinate: coordinate, info: info)
   }
 }

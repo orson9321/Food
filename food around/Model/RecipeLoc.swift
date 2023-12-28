@@ -7,6 +7,6 @@
 
 import Foundation
 
-class RecipePin: Location
+class RecipeLoc: Location
 {
 }

@@ -14,22 +14,30 @@ class ViewController: UIViewController, MKMapViewDelegate {
     
     // TODO this shouldn't be a constant, should depends on recipe location/distribution
     let distance_span: CLLocationDistance = 5000
-
+    
+    // Set mapView region to nation-wide
+    @IBAction func globeButtonTapped(_ sender: UIButton) {
+        mapView.setRegion(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 37.13283999999996, longitude: -95.78558000000002), span: MKCoordinateSpan(latitudeDelta: 100.92150354710479, longitudeDelta: 61.276014999999944)), animated: true)
+        loadNations()
+    }
+    
+    
     func initialize()
     {
         mapView.delegate = self
         mapView.mapType = .mutedStandard
     }
-   
+    
     override func viewDidLoad() {
+        print("view did load")
+        
         super.viewDidLoad()
         // assign all delegates
         initialize()
         // load nation pins
         loadNations()
-        
-        
-        //loadRecipeLocs()
+        // load recipe pins
+        loadRecipeLocs()
     }
     
     // Load all nation pins
@@ -47,13 +55,6 @@ class ViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
-    func loadRecipeLocs(ids: [Int])
-    {
-        for id in ids {
-            mapView.addAnnotation(recipe_storage[id]!)
-        }
-    }
-    
     // Calculate the center of the given recipe location
     func calcRecipeLocCenter(ids: [Int]) -> CLLocationCoordinate2D
     {
@@ -68,8 +69,8 @@ class ViewController: UIViewController, MKMapViewDelegate {
     }
     
     // Called when an annotation is selected.
+    // Selecting a pin merely change the mapView region
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        print("annotation selected")
         if let annotationTitle = view.annotation?.title
         {
             if let nation = view.annotation! as? Nation {
@@ -77,57 +78,54 @@ class ViewController: UIViewController, MKMapViewDelegate {
                 // zoom to selected location
                 let zoomed_region = MKCoordinateRegion(center: calcRecipeLocCenter(ids: recipe_pin_ids), latitudinalMeters: distance_span, longitudinalMeters: distance_span)
                 mapView.setRegion(zoomed_region, animated: true)
-                // display recipe pins
-                
-                // make a back button. When clicked, all recipe loc annotations get distroyed
-                loadRecipeLocs(ids: recipe_pin_ids)
             }
             else
             {
                 print("recipe loc pin")
                 // display recipe overlay
                 
-                // add buttom bar
-                
                 // recipe list overlay
             }
         }
+        
+        // deselect pin
+        view.isSelected = false
     }
     
-    // called when visible region changes
+    // Called when visible region changes. Hide or show pins depending on span
     func mapView(
         _ mapView: MKMapView,
         regionDidChangeAnimated animated: Bool
     )
     {
         let annotations = mapView.annotations
-
-            for annotation in annotations
+        for annotation in annotations
+        {
+            if (mapView.region.span.latitudeDelta > 30)
             {
-                if (mapView.region.span.latitudeDelta > 30)
+                if let nation = annotation as? Nation
+                {
+                    // prevent clustering to hide the nation pins. Doing this in viewDidLoad does not work for unknown reasons
+                    mapView.view(for: annotation)?.displayPriority = .required
+                    mapView.view(for: annotation)?.clusteringIdentifier = nil
+                    mapView.view(for: annotation)?.isHidden = false
+                }
+                else if let recipe_loc = annotation as? RecipeLoc
                 {
                     mapView.view(for: annotation)?.isHidden = true
-                    
-                    if let nation = annotation as? Nation
-                    {
-                        mapView.view(for: annotation)?.isHidden = false
-                    }
-                    else if let recipe_loc = annotation as? RecipeLoc
-                    {
-                        mapView.view(for: annotation)?.isHidden = true
-                    }
-                }
-                else {
-                    if let nation = annotation as? Nation
-                    {
-                        mapView.view(for: annotation)?.isHidden = true
-                    }
-                    else if let recipe_loc = annotation as? RecipeLoc
-                    {
-                        mapView.view(for: annotation)?.isHidden = false
-                    }
                 }
             }
+            else {
+                if let nation = annotation as? Nation
+                {
+                    mapView.view(for: annotation)?.isHidden = true
+                }
+                else if let recipe_loc = annotation as? RecipeLoc
+                {
+                    mapView.view(for: annotation)?.isHidden = false
+                }
+            }
+        }
     }
 }
 
